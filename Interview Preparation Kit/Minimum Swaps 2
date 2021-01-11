@@ -1,0 +1,31 @@
+import java.util.*;
+public class Solution{
+    static int minimumSwap(int[] a){
+        int swap=0;
+        for(int i=0;i<a.length;i++){
+            if(i+1!=a[i]){
+                int t=i;
+                while(a[t]!=i+1){
+                    t++;  
+                }
+                int temp=a[t];
+                a[t]=a[i];
+                a[i]=temp;
+                swap++;
+            }
+        }
+        return swap;
+    }
+
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int [] a = new int[n];
+        for(int i=0;i<n;i++){
+            a[i]=sc.nextInt();
+        }
+        int z = minimumSwap(a);
+        System.out.println(z);
+        sc.close();
+    }
+}
