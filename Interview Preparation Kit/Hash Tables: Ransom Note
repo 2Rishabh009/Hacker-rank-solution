@@ -1,0 +1,67 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+public class Solution{
+    static void checkMagzine(String[] magzine , String[] notes){
+        int c=0;
+        Map<String,Integer> mag = new HashMap<>();
+        Map<String,Integer> note = new HashMap<>();
+        for(int i=0;i<magzine.length;i++){
+            if(mag.containsKey(magzine[i])){
+                mag.put(magzine[i],mag.get(magzine[i])+1);
+            }else{
+                mag.put(magzine[i],1);
+            }
+            
+        }
+        for(int j=0;j<notes.length;j++){
+            if(note.containsKey(notes[j])){
+                note.put(notes[j],note.get(notes[j])+1);
+            }else{
+                note.put(notes[j],1);
+            }
+            
+        }
+        boolean flag=true;
+        for(String word : notes){
+            if(mag.containsKey(word)){
+                int z = note.get(word);
+                if(mag.get(word)<z){
+                    flag=false;
+                    break;
+                }
+            }else{
+                flag=false;
+                break;
+            }
+        }
+        if(flag==true){
+            System.out.println("Yes");
+        }else{
+            System.out.println("No");
+        }
+    }
+    static Scanner sc = new Scanner(System.in);
+    public static void main(String args[]){
+        String[] mn = sc.nextLine().split(" ");
+        int m = Integer.parseInt(mn[0]);
+        int n = Integer.parseInt(mn[1]);
+        String[] magzine = new String[m];
+        String[] notes = new String[n];
+        String[] magzineitem = sc.nextLine().split(" ");
+        String[] notesitem = sc.nextLine().split(" ");
+        for(int i =0 ;i<m;i++){
+            String z= magzineitem[i];
+            magzine[i]=z;
+        }
+        for(int j=0;j<n;j++){
+            notes[j]=notesitem[j];
+        }
+        checkMagzine(magzine,notes);
+        sc.close();
+    }
+}
